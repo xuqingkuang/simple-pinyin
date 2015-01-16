@@ -453,9 +453,15 @@
     };
 
     // 导出到 NodeJS
-    if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    if (typeof module === "object" && module && typeof module.exports === "object" && module.exports) {
         module.exports = simplePinyin;
     } else {
         root.simplePinyin = simplePinyin;
-    };
+        //兼容AMD模块加载器
+        if(typeof define ==="function" && define.amd){
+            define(function(){
+                return simplePinyin;
+            });
+        }
+    }
 }).call(this, this);
