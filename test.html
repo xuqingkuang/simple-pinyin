@@ -12,10 +12,10 @@
     $(document).ready(function() {
         $("select").select2({
             matcher: function(term, text) {
-                var mod, inA, inB;
+                var mod, inFull, inShort;
                 mod = simplePinyin(text);
-                inFull = mod.full.toUpperCase().indexOf(term.toUpperCase()) == 0;
-                inShort = mod.short.toUpperCase().indexOf(term.toUpperCase()) == 0;
+                inFull = mod.full.toUpperCase().indexOf(term.toUpperCase()) != -1;
+                inShort = mod.short.toUpperCase().indexOf(term.toUpperCase()) != -1;
                 return (inFull || inShort);
             }
         });
@@ -39,6 +39,8 @@
         <option value="11">韩寒</option>
         <option value="12">韩庚</option>
         <option value="13">阿信</option>
+        <option value="14">2014年</option>
+        <option value="15">这是汉字This is English1239014</option>
     </select>
 </body>
 </html>
