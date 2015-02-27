@@ -1,26 +1,26 @@
 {
-    "name": "simple-pinyin",
-    "description": "Simple Chinese to Pinyin translator",
-    "main": "./simple-pinyin.js",
-    "author": {
-        "name": "XQ Kuang"
-    },
-    "version": "1.0.0",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/xuqingkuang/simple-pinyin"
-    },
-    "bugs": {
-        "url": "https://github.com/xuqingkuang/simple-pinyin/issues"
-    },
-    "licenses": [
-        {
-            "type": "Apache 2.0",
-            "url": "https://github.com/xuqingkuang/simple-pinyin/blob/master/LICENSE"
-        }
-    ],
-    "devDependencies": {
-        "coffee-script": "~1.7.1",
-        "mocha": "~2.0.1"
+  "name": "simple-pinyin",
+  "description": "Simple Chinese to Pinyin translator",
+  "main": "./simple-pinyin.js",
+  "author": {
+    "name": "XQ Kuang"
+  },
+  "version": "1.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xuqingkuang/simple-pinyin"
+  },
+  "bugs": {
+    "url": "https://github.com/xuqingkuang/simple-pinyin/issues"
+  },
+  "licenses": [
+    {
+      "type": "Apache 2.0",
+      "url": "https://github.com/xuqingkuang/simple-pinyin/blob/master/LICENSE"
     }
+  ],
+  "devDependencies": {
+    "coffee-script": "~1.7.1",
+    "mocha": "~2.0.1"
+  }
 }
