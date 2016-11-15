@@ -32,3 +32,23 @@ simplePinyin('你好 NodeJS');
 ```
 
 可以参考[范例](http://xuqingkuang.github.io/simple-pinyin/)。
+
+select2 4.0.3 版本支持
+------------------
+需要使用 select2.full 而不是 select2.min
+```
+function matchStart (term, text) {
+    var mod, inFull, inShort;
+    mod = simplePinyin(text);
+    inFull = mod.full.toUpperCase().indexOf(term.toUpperCase()) >= 0;
+    inShort = mod.short.toUpperCase().indexOf(term.toUpperCase()) >= 0;
+    // 中文、拼音都支持，而不只是拼音
+    return (inFull || inShort)? true : text.toUpperCase().indexOf(term.toUpperCase()) >=0;
+}
+
+$.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+    $("select").select2({
+        matcher: oldMatcher(matchStart)
+    }) 
+});
+```     
