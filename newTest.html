@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>下拉条拼音筛选演示</title>
+    <meta charset="utf-8" />
+    <link href="https://cdn.staticfile.org/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
+    <script src="http://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/select2/4.0.3/js/select2.full.min.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/select2/4.0.3/js/i18n/zh-CN.js"></script>
+    <script type="text/javascript" src="./simple-pinyin.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        // for select2 4.0.3 varsion, you have to use select2.full.min.js instead of select2.min.js
+        function matchStart (term, text) {
+            var mod, inFull, inShort;
+            mod = simplePinyin(text);
+            inFull = mod.full.toUpperCase().indexOf(term.toUpperCase()) >= 0;
+            inShort = mod.short.toUpperCase().indexOf(term.toUpperCase()) >= 0;
+            // both Chinese and Chinese Pinyin are supported
+            return (inFull || inShort)? true : text.toUpperCase().indexOf(term.toUpperCase()) >=0;
+        }
+        $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+           $("select").select2({
+            matcher: oldMatcher(matchStart)
+           }) 
+        });
+        // end
+       
+    });
+    </script>
+</head>
+<body>
+    <h2>拼音、首字母筛选，智能向上向下展开。</h2>
+    <select style="width: 200px;">
+        <option value="0">马云</option>
+        <option value="1">马化腾</option>
+        <option value="2">李彦宏</option>
+        <option value="3">章子怡</option>
+        <option value="4">撒贝宁</option>
+        <option value="5">刘强东</option>
+        <option value="6">周鸿祎</option>
+        <option value="7">任正非</option>
+        <option value="8">史玉柱</option>
+        <option value="9">姚晨</option>
+        <option value="10">方舟子</option>
+        <option value="11">韩寒</option>
+        <option value="12">韩庚</option>
+        <option value="13">阿信</option>
+        <option value="14">2014年</option>
+        <option value="15">这是汉字This is English1239014</option>
+    </select>
+</body>
+</html>
