@@ -1,5 +1,19 @@
 {
   "name": "simple-pinyin",
-  "version": "3.0.0",
-  "main": "./dist/index.js"
+  "version": "3.0.1",
+  "authors": [
+    "XQ Kuang <x@kxq.io>"
+  ],
+  "license": "MIT",
+  "main": "./dist/index.min.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "ignore": [
+    "node_modules",
+    "src",
+    "coverage"
+  ]
 }
