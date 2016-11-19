@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>simplePinyin test</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" />
+    <style>
+    h2 {
+      margin: 15px;
+    }
+    textarea, .card {
+      height: 100%;
+      width: 100%;
+    }
+    .card-block {
+      overflow: auto;
+    }
+    @media (min-width: 544px) {
+      .container-fluid {
+        height: 100%;
+      }
+      #editor-container {
+        height: 90vh;
+      }
+      #short-container, #full-container {
+        height: 45vh;
+      }
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <h2>simplePinyin 测试</h2>
+      <div id="editor-container" class="col-xs-12 col-sm-6">
+        <div class="card">
+          <div class="card-header">编辑器</div>
+          <div class="card-block">
+            <div id="editor" class="form-group" contenteditable="true">
+              妈妈跟我说再也不用担心我的 Chinese 不知道怎么念了。
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <div id="short-container">
+          <div class="card">
+            <div class="card-header">完整翻译</div>
+            <div class="card-block">
+              <div id="full" class="form-group"></div>
+            </div>
+          </div>
+        </div>
+        <div id="full-container">
+          <div class="card">
+            <div class="card-header">首字母</div>
+            <div class="card-block">
+              <div id="short" class="form-group"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.staticfile.org/jquery/3.1.1/jquery.slim.js"></script>
+    <script src="./dist/index.min.js"></script>
+    <script>
+      var $editor = $('#editor'),
+          $full = $('#full'),
+          $short = $('#short'),
+          timer,
+          text,
+          pinyin;
+      var translate = function() {
+        text = $editor.text();
+        pinyin = simplePinyin.default(text);
+        console.log(JSON.stringify(pinyin));
+        $full.text(pinyin.full.join(' '));
+        $short.text(pinyin.short.join(' '));
+      }
+      $editor.focus();
+      $editor.on('keyup', function() {
+        clearTimeout(timer);
+        timer = setTimeout(translate, 300);
+      });
+      translate();
+    </script>
+  </body>
+</html>
