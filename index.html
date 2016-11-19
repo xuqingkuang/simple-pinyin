@@ -12,7 +12,7 @@
       height: 100%;
       width: 100%;
     }
-    #time {
+    .pull-right {
       float: right;
     }
     .card-block {
@@ -33,7 +33,13 @@
       <h2>simplePinyin 测试</h2>
       <div id="editor-container" class="col-xs-12 col-sm-6">
         <div class="card">
-          <div class="card-header">编辑器</div>
+          <div class="card-header">
+            编辑器
+            <label class="pull-right">
+              <input id="pinyinOnly" type="checkbox" checked />
+              只翻译拼音
+            </label>
+          </div>
           <div class="card-block">
             <div id="editor" class="form-group" contenteditable="true">
               妈妈跟我说再也不用担心我的 Chinese 不知道怎么念了。
@@ -46,7 +52,7 @@
           <div class="card">
             <div class="card-header">
               完整翻译
-              <span id="time"></span>
+              <span id="time" class="pull-right"></span>
             </div>
             <div class="card-block">
               <div id="pinyin" class="form-group"></div>
@@ -58,8 +64,10 @@
     <script src="./dist/index.min.js"></script>
     <script>
       var $editor = document.getElementById('editor'),
+          $pinyinOnly = document.getElementById('pinyinOnly'),
           $pinyin = document.getElementById('pinyin'),
           $time = document.getElementById('time'),
+          options = { pinyinOnly: true },
           timer,
           text,
           now,
@@ -68,7 +76,7 @@
       var translate = function() {
         text = $editor.innerText;
         now = new Date();
-        pinyin = simplePinyin.default(text);
+        pinyin = simplePinyin.default(text, options);
         time = (new Date()) - now;
         $time.innerText = '花费时间：' + time + '毫秒。'
         console.log(JSON.stringify(pinyin));
@@ -79,6 +87,10 @@
         clearTimeout(timer);
         timer = setTimeout(translate, 300);
       });
+      $pinyinOnly.addEventListener('change', function() {
+        options.pinyinOnly = $pinyinOnly.checked;
+        translate();
+      })
       translate();
     </script>
   </body>

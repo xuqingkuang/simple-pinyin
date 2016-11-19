@@ -5,6 +5,17 @@ interface IPinyinLetters {
   py: string;
 }
 
+interface IOptions {
+  pinyinOnly: boolean;
+}
+
+/**
+ * Default Options
+ */
+const DEFAULT_OPTIONS: IOptions = {
+  pinyinOnly: true,
+};
+
 /**
  * RegExp for normal string;
  */
@@ -53,7 +64,7 @@ const getFilter = () => {
  * @param {string} sentence The chineseWords word.
  * returns {object}
  */
-const simplePinyin = (sentence: string): string[] => {
+const simplePinyin = (sentence: string, options: IOptions = DEFAULT_OPTIONS): string[] => {
   if (typeof sentence !== 'string') {
     throw TypeError('Input for simplePinyin must be string');
   }
@@ -67,13 +78,16 @@ const simplePinyin = (sentence: string): string[] => {
     // Get the character one by one
     const str = sentence.substr(i, 1);
 
-    // empty space
+    // skip empty space
     if (str.trim().length === 0 || str === ' ') {
       continue;
     }
 
     // Process normal english
     if (NORMAL_STRING.test(str)) {
+      if (options.pinyinOnly) {
+        continue;
+      }
       const previousStr = sentence.substr(i - 1, 1);
       if (i !== 0 && NORMAL_STRING.test(previousStr)) {
         pinyin[pinyin.length - 1] += str;
@@ -87,6 +101,9 @@ const simplePinyin = (sentence: string): string[] => {
     const iterator = getIterator(str);
     const targetRow = dataFilter(iterator);
     if (!targetRow) {
+      if (options.pinyinOnly) {
+        continue;
+      }
       pinyin.push(str);
       continue;
     }
