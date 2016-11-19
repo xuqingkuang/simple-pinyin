@@ -18,7 +18,7 @@
     "coverage",
     "tsconfig.json",
     "tslint.json",
-    "webpack.config.json",
+    "webpack.config.js",
     "yarn.lock"
   ]
 }
