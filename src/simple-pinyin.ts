@@ -77,7 +77,7 @@ const getFilter = () => {
 /**
  * Convert chineseWords word to pinyin
  * 
- * @param {string} chineseWords The chineseWords word.
+ * @param {string} sentence The chineseWords word.
  * returns {object}
  */
 const simplePinyin = (sentence: string): IPinyin => {
