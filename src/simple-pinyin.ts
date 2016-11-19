@@ -5,37 +5,10 @@ interface IPinyinLetters {
   py: string;
 }
 
-interface IPinyin {
-  full: string[];
-  short: string[];
-}
-
 /**
  * RegExp for normal string;
  */
 const NORMAL_STRING = new RegExp('[a-zA-Z0-9]');
-
-/**
- * Get the Pinyin word.
- * 
- * @param {string} pinyin The pinyin(key) of dictionary
- * returns {object}
- */
-const getPinyin = (pinyin: string): IPinyinLetters => {
-  if (pinyin.length <= 0) {
-    return {
-      first: '',
-      py: '',
-    };
-  }
-  const first = pinyin.substr(0, 1).toUpperCase();
-  const spare = pinyin.substr(1, pinyin.length);
-  const py = first + spare;
-  return {
-    first,
-    py,
-  };
-};
 
 /**
  * Get the iterator for query the targetRow
@@ -80,22 +53,21 @@ const getFilter = () => {
  * @param {string} sentence The chineseWords word.
  * returns {object}
  */
-const simplePinyin = (sentence: string): IPinyin => {
+const simplePinyin = (sentence: string): string[] => {
   if (typeof sentence !== 'string') {
     throw TypeError('Input for simplePinyin must be string');
   }
   // Filter
   const dataFilter = getFilter();
   // Initial the returns
-  let full: string[] = [];
-  let short: string[] = [];
+  let pinyin: string[] = [];
 
   // Splite the Chinese sentence
   for (let i = 0; i < sentence.length; i++) {
     // Get the character one by one
     const str = sentence.substr(i, 1);
 
-    // Blank
+    // empty space
     if (str.trim().length === 0 || str === ' ') {
       continue;
     }
@@ -104,37 +76,23 @@ const simplePinyin = (sentence: string): IPinyin => {
     if (NORMAL_STRING.test(str)) {
       const previousStr = sentence.substr(i - 1, 1);
       if (i !== 0 && NORMAL_STRING.test(previousStr)) {
-        full[full.length - 1] += str;
-        short[short.length - 1] += str;
+        pinyin[pinyin.length - 1] += str;
       } else {
-        full.push(str);
-        short.push(str);
+        pinyin.push(str);
       }
       continue;
     }
 
     // Get the pinyin
-    [full, short] = ((str, f, s) => {
-      const iterator = getIterator(str);
-      const targetRow = dataFilter(iterator);
-      let pinyin: IPinyinLetters;
-      if (targetRow) {
-        pinyin = getPinyin(targetRow[0]);
-      } else {
-        pinyin = {
-          first: str,
-          py: str,
-        };
-      }
-      f.push(pinyin.py);
-      s.push(pinyin.first);
-      return [f, s];
-    })(str, full, short);
+    const iterator = getIterator(str);
+    const targetRow = dataFilter(iterator);
+    if (!targetRow) {
+      pinyin.push(str);
+      continue;
+    }
+    pinyin.push(targetRow[0]);
   }
-  return {
-    full,
-    short,
-  };
+  return pinyin;
 };
 
 export default simplePinyin;

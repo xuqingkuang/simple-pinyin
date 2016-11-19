@@ -39,7 +39,7 @@ ES6 Module
 然后就可以直接输入中文，输出拼音了。
 
     simplePinyin('你好 simplePinyin!');
-    >> Object {"full":["Ni","Hao","simplePinyin","!"],"short":["N","H","simplePinyin","!"]}
+    >> ["ni", "hao", "simplePinyin", "!"]
 
 可以参考[范例](http://xuqingkuang.github.io/simple-pinyin/)。
 

@@ -3,7 +3,7 @@
   "description": "Simple Chinese to Pinyin translator",
   "main": "./dist/index.js",
   "author": "XQ Kuang <x@kxq.io>",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/xuqingkuang/simple-pinyin"
