@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>simplePinyin test</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" />
+    <style>
+    h2 {
+      margin: 15px;
+    }
+    textarea, .card {
+      height: 100%;
+      width: 100%;
+    }
+    .pull-right {
+      float: right;
+    }
+    .card-block {
+      overflow: auto;
+    }
+    @media (min-width: 544px) {
+      .container-fluid {
+        height: 100%;
+      }
+      #editor-container, #pinyin-container {
+        height: 90vh;
+      }
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <h2>simplePinyin 测试</h2>
+      <div id="editor-container" class="col-xs-12 col-sm-6">
+        <div class="card">
+          <div class="card-header">
+            编辑器
+            <label class="pull-right">
+              <input id="pinyinOnly" type="checkbox" checked />
+              只翻译拼音
+            </label>
+          </div>
+          <div class="card-block">
+            <div id="editor" class="form-group" contenteditable="true">
+              妈妈跟我说再也不用担心我的 Chinese 不知道怎么念了。
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <div id="pinyin-container">
+          <div class="card">
+            <div class="card-header">
+              完整翻译
+              <span id="time" class="pull-right"></span>
+            </div>
+            <div class="card-block">
+              <div id="pinyin" class="form-group"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./dist/index.min.js"></script>
+    <script>
+      var $editor = document.getElementById('editor'),
+          $pinyinOnly = document.getElementById('pinyinOnly'),
+          $pinyin = document.getElementById('pinyin'),
+          $time = document.getElementById('time'),
+          options = { pinyinOnly: true },
+          timer,
+          text,
+          now,
+          time,
+          pinyin;
+      var translate = function() {
+        text = $editor.innerText;
+        now = new Date();
+        pinyin = simplePinyin.default(text, options);
+        time = (new Date()) - now;
+        $time.innerText = '花费时间：' + time + '毫秒。'
+        console.log(JSON.stringify(pinyin));
+        $pinyin.innerText = pinyin.join(' ');
+      }
+      $editor.focus();
+      $editor.addEventListener('keyup', function() {
+        clearTimeout(timer);
+        timer = setTimeout(translate, 300);
+      });
+      $pinyinOnly.addEventListener('change', function() {
+        options.pinyinOnly = $pinyinOnly.checked;
+        translate();
+      })
+      translate();
+    </script>
+  </body>
+</html>
