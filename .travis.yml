@@ -2,8 +2,6 @@ sudo: false
 language: node_js
 script: npm run test
 node_js:
-  - 0.12.17
-  - 4
   - 6
 cache:
   directories:
