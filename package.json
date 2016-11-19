@@ -3,7 +3,7 @@
   "description": "Simple Chinese to Pinyin translator",
   "main": "./dist/index.min.js",
   "author": "XQ Kuang <x@kxq.io>",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/xuqingkuang/simple-pinyin"
@@ -20,8 +20,8 @@
     "ghpages": "gh-pages -d ."
   },
   "files": [
-    "./dist/index.min.js",
-    "./dist/index.min.js.map",
+    "dist/index.min.js",
+    "dist/index.min.js.map",
     "README.md",
     "LICENESE",
     "bower.json",

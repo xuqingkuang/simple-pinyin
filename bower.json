@@ -1,6 +1,6 @@
 {
   "name": "simple-pinyin",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "authors": [
     "XQ Kuang <x@kxq.io>"
   ],
@@ -12,8 +12,13 @@
     "node"
   ],
   "ignore": [
+    ".*",
     "node_modules",
     "src",
-    "coverage"
+    "coverage",
+    "tsconfig.json",
+    "tslint.json",
+    "webpack.config.json",
+    "yarn.lock"
   ]
 }
