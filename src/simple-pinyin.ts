@@ -24,29 +24,27 @@ const NORMAL_STRING = new RegExp('[a-zA-Z0-9]');
 /**
  * Get the iterator for query the targetRow
  */
-const getIterator = (str: string) => (pinyinRow: string[]) => {
-  return pinyinRow[1].indexOf(str) >= 0;
-};
+const getIterator = (str: string) => (pinyinRow: string[]) => pinyinRow[1].indexOf(str) >= 0;
 
 /**
  * Get the data filter
  */
 const getFilter = () => {
-  if (typeof((<any> Array.prototype).find) === 'function') {
-    return (iterator: (value: string[], index: number, array: string[][]) => {}) => {
-      return (<any> dictionary).find(iterator);
-    };
+  if (typeof ((<any> Array.prototype).find) === 'function') {
+    return (iterator: (value: string[], index: number, array: string[][]) => {}) => (
+      (<any> dictionary).find(iterator)
+    );
   }
 
-  if (typeof(Array.prototype.filter) === 'function') {
-    return (iterator: (value: string[], index: number, array: string[][]) => {}) => {
-      return dictionary.filter(iterator)[0];
-    };
+  if (typeof (Array.prototype.filter) === 'function') {
+    return (iterator: (value: string[], index: number, array: string[][]) => {}) => (
+      dictionary.filter(iterator)[0]
+    );
   }
 
   return (iterator: Function) => {
-    let targetRow: string[];
-    for (let i = 0; i < dictionary.length; i++) {
+    let targetRow: string[] = [];
+    for (let i = 0; i < dictionary.length; i += 1) {
       const pinyinRow = dictionary[i];
       if (!iterator(pinyinRow)) {
         continue;
@@ -60,7 +58,7 @@ const getFilter = () => {
 
 /**
  * Convert chineseWords word to pinyin
- * 
+ *
  * @param {string} sentence The chineseWords word.
  * returns {object}
  */
@@ -71,10 +69,10 @@ const simplePinyin = (sentence: string, options: IOptions = DEFAULT_OPTIONS): st
   // Filter
   const dataFilter = getFilter();
   // Initial the returns
-  let pinyin: string[] = [];
+  const pinyin: string[] = [];
 
   // Splite the Chinese sentence
-  for (let i = 0; i < sentence.length; i++) {
+  for (let i = 0; i < sentence.length; i += 1) {
     // Get the character one by one
     const str = sentence.substr(i, 1);
 

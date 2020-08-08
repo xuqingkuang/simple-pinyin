@@ -32,7 +32,7 @@
 
 CMD
 
-    const simplePinyin = require('simple-pinyin').default;
+    const simplePinyin = require('simple-pinyin');
 
 ES6 Module
 
@@ -55,8 +55,15 @@ CollectionView for ChaplinJS 可以使用 [filterer 参数](http://docs.chaplinj
 | ---------- | ------- | ---------------------------------------- | ---- |
 | pinyinOnly | boolean | 是否只输出拼音，true 为是，false 时将连带英文字符和特殊符号都一起输出 | true |
 
-## 更新历史
+## Roadmap
 
+* 4.0
+  * 增加字典树，实现多音字功能
+
+## 更新历史
+* 3.1 - 2020年8月8日
+  * 更新到最新依赖，用 rollup 替换掉 webpack、eslint 替换掉 tslint、ava 替换掉 jest
+  * 将文本在加载时转成 Hashmap，进一步提升转换速度
 * 3.0 - 2016年11月20日
   * 进一步调整输出，取消 short 的拼音首字母输出，如果需要可以直接使用 pinyin.map(p => p[0]).join('') 便能恢复到和 1.0 时相同的首字母拼音输出。
   * 增加 pinyinOnly 参数，默认开启，直接 join 配合上一条可以做到和 1.0 时 full 输出一样的结果。
