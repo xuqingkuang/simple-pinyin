@@ -1,8 +1,6 @@
 # simple-pinyin
 
-[![npm version](https://badge.fury.io/js/simple-pinyin.svg)](https://badge.fury.io/js/simple-pinyin)
-[![Bower version](https://badge.fury.io/bo/simple-pinyin.svg)](https://badge.fury.io/bo/simple-pinyin)
-[![license](https://img.shields.io/badge/license-MIT)](https://github.com/xuqingkuang/simple-pinyin/blob/master/LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/xuqingkuang/simple-pinyin/pulls) [![Actions Status](https://github.com/xuqingkuang/simple-pinyin/workflows/build/badge.svg?branch=master)](https://github.com/xuqingkuang/simple-pinyin/actions) [![Codecov](https://img.shields.io/codecov/c/github/xuqingkuang/simple-pinyin)](https://codecov.io/gh/xuqingkuang/simple-pinyin)
+[![npm version](https://badge.fury.io/js/simple-pinyin.svg)](https://badge.fury.io/js/simple-pinyin) [![license](https://img.shields.io/badge/license-MIT)](https://github.com/xuqingkuang/simple-pinyin/blob/master/LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/xuqingkuang/simple-pinyin/pulls) [![Actions Status](https://github.com/xuqingkuang/simple-pinyin/workflows/build/badge.svg?branch=master)](https://github.com/xuqingkuang/simple-pinyin/actions) [![Codecov](https://img.shields.io/codecov/c/github/xuqingkuang/simple-pinyin)](https://codecov.io/gh/xuqingkuang/simple-pinyin)
 
 一个简单的汉字转换到拼音模块，目前覆盖了 401 个常用音和和 6765 个常用汉字，可以同时应用于 NodeJS
 和浏览器环境。

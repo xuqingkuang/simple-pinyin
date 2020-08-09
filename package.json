@@ -22,8 +22,8 @@
     "coverage": "nyc -r lcov -r text ava"
   },
   "files": [
-    "dist/index.min.js",
-    "dist/index.min.js.map",
+    "dist/index.esm.js",
+    "dist/index.umd.js",
     "README.md",
     "LICENESE",
     "bower.json",
