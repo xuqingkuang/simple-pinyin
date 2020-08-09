@@ -36,8 +36,12 @@
           <div class="card-header">
             编辑器
             <label class="pull-right">
-              <input id="pinyinOnly" type="checkbox" checked />
-              只翻译拼音
+              匹配所有字符
+              <select  id="matchFullText">
+                <option value="">跳过非拼音</option>
+                <option value="blank">非拼音输出为空字符串</option>
+                <option value="original">非拼音输出为原始字符</option>
+              </select>
             </label>
           </div>
           <div class="card-block">
@@ -61,13 +65,13 @@
         </div>
       </div>
     </div>
-    <script src="./dist/index.min.js"></script>
+    <script src="./dist/index.umd.js"></script>
     <script>
       var $editor = document.getElementById('editor'),
-          $pinyinOnly = document.getElementById('pinyinOnly'),
+          $matchFullText = document.getElementById('matchFullText'),
           $pinyin = document.getElementById('pinyin'),
           $time = document.getElementById('time'),
-          options = { pinyinOnly: true },
+          options = { matchFullText: '' },
           timer,
           text,
           now,
@@ -75,11 +79,11 @@
           pinyin;
       var translate = function() {
         text = $editor.innerText;
-        now = new Date();
+        now = performance.now();
         pinyin = simplePinyin.default(text, options);
-        time = (new Date()) - now;
+        time = (performance.now()) - now;
         $time.innerText = '花费时间：' + time + '毫秒。'
-        console.log(JSON.stringify(pinyin));
+        console.log('output', JSON.stringify(pinyin));
         $pinyin.innerText = pinyin.join(' ');
       }
       $editor.focus();
@@ -87,8 +91,8 @@
         clearTimeout(timer);
         timer = setTimeout(translate, 300);
       });
-      $pinyinOnly.addEventListener('change', function() {
-        options.pinyinOnly = $pinyinOnly.checked;
+      $matchFullText.addEventListener('change', function() {
+        options.matchFullText = $matchFullText.value;
         translate();
       })
       translate();
