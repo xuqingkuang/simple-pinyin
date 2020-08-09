@@ -30,7 +30,7 @@ const minConfig = {
     ...config.output,
     file: 'dist/index.umd.js',
     format: 'umd',
-    name: 'simplyPinyin'
+    name: 'simplePinyin',
   },
   plugins: [
     resolve(),

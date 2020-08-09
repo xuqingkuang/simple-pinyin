@@ -1,10 +1,10 @@
 {
   "name": "simple-pinyin",
   "description": "Simple Chinese to Pinyin translator",
-  "main": "./dist/index.umd.js",
+  "main": "dist/index.umd.js",
   "module": "dist/index.esm.js",
   "author": "XQ Kuang <x@kxq.io>",
-  "version": "3.1.0",
+  "version": "4.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/xuqingkuang/simple-pinyin"
@@ -18,7 +18,8 @@
     "clean": "rimraf ./dist",
     "lint": "eslint src/*.ts",
     "test": "ava",
-    "ghpages": "gh-pages -d ."
+    "ghpages": "gh-pages -d .",
+    "coverage": "nyc -r lcov -r text ava"
   },
   "files": [
     "dist/index.min.js",
@@ -39,6 +40,7 @@
     "eslint-config-airbnb-typescript": "^9.0.0",
     "eslint-plugin-import": "^2.22.0",
     "gh-pages": "^3.1.0",
+    "nyc": "^15.1.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.23.1",
     "rollup-plugin-terser": "^6.1.0",
