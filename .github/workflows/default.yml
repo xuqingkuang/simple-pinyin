@@ -1,0 +1,30 @@
+name: build
+
+on: [ push, pull_request ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ 10.x, 13.x ]
+    steps:
+      - uses: actions/checkout@v1
+      - name: setup-node
+        uses: actions/setup-node@master
+        with:
+          node-version: ${{ matrix.node }}
+          registry-url: https://npm.pkg.github.com
+      - name: install
+        run: npm install
+      - name: lint
+        run: npm run lint
+      - name: test
+        run: npm run coverage
+      - name: coverage
+        if: matrix.node == '10.x'
+        uses: codecov/codecov-action@v1
+        with:
+          token: 7453a40b-75e9-477f-b44b-7b03ddf0f280
+      - name: build
+        run: npm run build

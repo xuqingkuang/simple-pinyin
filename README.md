@@ -2,9 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/simple-pinyin.svg)](https://badge.fury.io/js/simple-pinyin)
 [![Bower version](https://badge.fury.io/bo/simple-pinyin.svg)](https://badge.fury.io/bo/simple-pinyin)
-[![Build Status](https://travis-ci.org/xuqingkuang/simple-pinyin.svg?branch=master)](https://travis-ci.org/xuqingkuang/simple-pinyin)
-[![codecov](https://codecov.io/gh/xuqingkuang/simple-pinyin/branch/master/graph/badge.svg)](https://codecov.io/gh/xuqingkuang/simple-pinyin)
-[![devDependency Status](https://david-dm.org/xuqingkuang/simple-pinyin/dev-status.svg)](https://david-dm.org/xuqingkuang/simple-pinyin?type=dev)
+[![license](https://img.shields.io/badge/license-MIT)](https://github.com/xuqingkuang/simple-pinyin/blob/master/LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/xuqingkuang/simple-pinyin/pulls) [![Actions Status](https://github.com/xuqingkuang/simple-pinyin/workflows/build/badge.svg?branch=master)](https://github.com/xuqingkuang/simple-pinyin/actions) [![Codecov](https://img.shields.io/codecov/c/github/xuqingkuang/simple-pinyin)](https://codecov.io/gh/xuqingkuang/simple-pinyin)
 
 一个简单的汉字转换到拼音模块，目前覆盖了 401 个常用音和和 6765 个常用汉字，可以同时应用于 NodeJS
 和浏览器环境。
@@ -32,7 +30,7 @@
 
 CMD
 
-    const simplePinyin = require('simple-pinyin');
+    const { default: simpleyPinyin } = require('simple-pinyin');
 
 ES6 Module
 
@@ -45,25 +43,24 @@ ES6 Module
 
 可以参考[范例](http://xuqingkuang.github.io/simple-pinyin/)。
 
-Select2 的过滤可以使用 [matcher 参数](http://select2.github.io/examples.html#matcher)，
-CollectionView for ChaplinJS 可以使用 [filterer 参数](http://docs.chaplinjs.org/chaplin.collection_view.html#filterer)，
-更多框架还请参考各自文档。
+Select2 的过滤可以使用 [matcher 参数](https://select2.org/searching#customizing-how-results-are-matched)，CollectionView for ChaplinJS 可以使用 [filterer 参数](http://docs.chaplinjs.org/chaplin.collection_view.html#filterer)，更多框架还请参考各自文档。
 
 ### 参数
 
 | 参数名称       | 类型      | 解释                                       | 默认值  |
 | ---------- | ------- | ---------------------------------------- | ---- |
-| pinyinOnly | boolean | 是否只输出拼音，true 为是，false 时将连带英文字符和特殊符号都一起输出 | true |
+| matchFullText | blank or original | 完整匹配文本参数，可以输出和原文本一样长度的数组，blank 参数对不是拼音文本你输出空字符，original 会输出原始文本文本。如果不设置的话则跟 3.0 时不加 pinyinOnly 时效果一样。 | 无 |
 
 ## Roadmap
 
-* 4.0
-  * 增加字典树，实现多音字功能
+* 4.1
+  * 增加字典树，实现多音字功能，输出和 4.0 保持一致
 
 ## 更新历史
-* 3.1 - 2020年8月8日
+* 4.0 - 2020年8月8日
   * 更新到最新依赖，用 rollup 替换掉 webpack、eslint 替换掉 tslint、ava 替换掉 jest
-  * 将文本在加载时转成 Hashmap，进一步提升转换速度
+  * 将文本在加载时转成 Hashmap，进一步提升转换速度，0.02毫秒就可以翻译出来原文本。
+  * 将 pinyinOnly 参数改为 matchFullText，开启后输出的数组顺序将和原文本相同，方便进行注音标注。
 * 3.0 - 2016年11月20日
   * 进一步调整输出，取消 short 的拼音首字母输出，如果需要可以直接使用 pinyin.map(p => p[0]).join('') 便能恢复到和 1.0 时相同的首字母拼音输出。
   * 增加 pinyinOnly 参数，默认开启，直接 join 配合上一条可以做到和 1.0 时 full 输出一样的结果。
